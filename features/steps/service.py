@@ -5,7 +5,6 @@ http://docs.python-requests.org/
 """
 
 import requests
-
 from behave import *
 
 # "Constants"

@@ -2,9 +2,10 @@ language: python
 python:
   - "3.6"
 install:
-  - pip install -U selenium sauceclient
+  - pip install -U selenium sauceclient pipenv
+  - pipenv install
 script:
-  - python selenium-simple.py
+  - pipenv run behave
 addons:
   sauce_connect:
     username: "ben_wolski"

@@ -15,10 +15,15 @@ from selenium import webdriver
 # The correct browser and WebDriver executable must be installed on the test machine.
 # A flexible framework would read the browser choice from inputs or config data.
 
+SAUCE_USERNAME = 'ben_wolski'
+SAUCE_ACCESS_KEY = 'ca8ed953-f7fa-458e-a2f3-2f791cc147a3'
 
 def before_scenario(context, scenario):
     if 'web' in context.tags:
-        context.browser = webdriver.Firefox()
+        context.browser = webdriver.Remote(
+            desired_capabilities = webdriver.DesiredCapabilities.FIREFOX, 
+              command_executor='http://%s:%s@ondemand.saucelabs.com:80/wd/hub' 
+                % (SAUCE_USERNAME, SAUCE_ACCESS_KEY))
         context.browser.implicitly_wait(10)
 
 

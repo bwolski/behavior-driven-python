@@ -1,29 +1,23 @@
-@service @duckduckgo
-Feature: DuckDuckGo Instant Answer API
-  As an application developer,
-  I want to get instant answers for search terms via a REST API,
-  So that my app can get answers anywhere.
+@service @jyver @registration
+Feature: Onboarding Registration API
+  In order to display relevant messages to an applicant during registration,
+  As an application developer for Jyve
+  I want to get relevant registration information via a REST API
 
-  # It is popular practice to use imperative steps for service API testing.
-  # Karate does this: https://github.com/intuit/karate
-  # However, better BDD practice is to use declarative steps.
-  # This allows greater code reuse in the automation code.
+  Scenario Outline: Invalid ZIP Code API Check
+    When the Registration API is queried with
+      | zipcode   | expected_result   |
+      | <zipcode> | <expected_result> |
+    Then the API returns a result of <expected_result>
 
-  Scenario Outline: Basic DuckDuckGo API Query
-    When the DuckDuckGo API is queried with
-      | phrase   | format |
-      | <phrase> | json   |
-    Then the response status code is "200"
-    And the response contains results for "<phrase>"
+    Examples: Not Real ZIP Code
+      | zipcode  | expected_result |
+      | 22222    | False           |
+      | 33333    | False           |
+      
+    Examples: Real ZIP Code
+      | zipcode  | expected_result |
+      | 94103    | True           |
+      | 34241    | True           |
+   
 
-    Examples: Animals
-      | phrase   |
-      | panda    |
-      | python   |
-      | platypus |
-
-    Examples: Fruits
-      | phrase     |
-      | peach      |
-      | pineapple  |
-      | papaya     |

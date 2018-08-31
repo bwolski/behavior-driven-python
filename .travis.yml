@@ -5,7 +5,7 @@ install:
   - pip install -U selenium sauceclient pipenv
   - pipenv install
 script:
-  - pipenv run behave
+  - pipenv run behave -t @service
 addons:
   sauce_connect:
     username: "ben_wolski"
